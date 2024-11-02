@@ -94,9 +94,22 @@ def rating_question():
 
     return rating_questions[0]
     
+def continue_question():
+    continue_question = prompt(
+        [
+            {
+                "type": "confirm",
+                "message": "Do you want to continue?",
+                "default": True,
+            }
+        ]
+    )
+
+    return continue_question[0]
 
 def main():
-    
+    print("Welcome to the IMDB Top 1000 Movies Finder")
+
     chosen_genres = genres_question()
 
     chosen_year = year_question()
@@ -105,6 +118,15 @@ def main():
     
     print(chosen_genres, chosen_year, chosen_rating)
 
-if __name__ == "__main__":
+
+while True:
     main()
+
+    continue_ = continue_question()
+
+    if not continue_:
+        print("Thank you for using the IMDB Top 1000 Movies Finder")
+        exit(0)
+
+
 
