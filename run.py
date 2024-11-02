@@ -36,6 +36,8 @@ def ask_genre_question():
                 "message": "Choose a genre",
                 "choices": movies_genre,
                 "instruction": "(Press up/down arrows to see more options. Press 'space' to select, 'enter' to confirm)",
+                "validate": lambda result: len(result) < 4,
+                "invalid_message": "You can only choose up to 3 genres",
             }
         ]
     )
@@ -140,9 +142,9 @@ def main():
         another_filter = ask_another_filter_question()
 
         if not another_filter:
-            print(search_result) #show the results
             continue_search = ask_continue_question()
             if not continue_search:
+                print("Thank you for using the IMDB Top 1000 Movies Finder")
                 break
 
 def gather_search_params():
