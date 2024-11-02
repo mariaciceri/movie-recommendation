@@ -1,7 +1,9 @@
 from InquirerPy import prompt
+from InquirerPy.base.control import Choice
+import recommender as rec
 
 
-def genres_question():
+def ask_genre_question():
     movies_genre = [
         "Film-Noir",
         "Drama",
@@ -33,7 +35,7 @@ def genres_question():
                 "type": "checkbox",
                 "message": "Choose a genre",
                 "choices": movies_genre,
-                "instruction": "(Use arrow up/down to see more genre options. Use space to select, enter to confirm)",
+                "instruction": "(Press up/down arrows to see more options. Press 'space' to select, 'enter' to confirm)",
             }
         ]
     )
@@ -52,7 +54,7 @@ def validate_year(year):
     except ValueError:
         return False
     
-def year_question():
+def ask_year_question():
     year_questions = prompt(
         [
             {
@@ -79,7 +81,7 @@ def validate_rating(rating):
     except ValueError:
         return False
     
-def rating_question():
+def ask_rating_question():
     rating_questions = prompt(
         [
             {
@@ -94,12 +96,25 @@ def rating_question():
 
     return rating_questions[0]
     
-def continue_question():
+def ask_another_filter_question():
+    another_filter_question = prompt(
+        [
+            {
+                "type": "confirm",
+                "message": "Do you want to choose another filter?",
+                "default": False,
+            }
+        ]
+    )
+
+    return another_filter_question[0]
+
+def ask_continue_question():
     continue_question = prompt(
         [
             {
                 "type": "confirm",
-                "message": "Do you want to continue?",
+                "message": "Do you want to search anew?",
                 "default": True,
             }
         ]
@@ -110,23 +125,58 @@ def continue_question():
 def main():
     print("Welcome to the IMDB Top 1000 Movies Finder")
 
-    chosen_genres = genres_question()
+    search_result = rec.SearchResult()
+    while True:
+        filter, result = gather_search_params()
+        #search_results = search_movies(search_params)
+        #display_search_results(search_results)
+        if filter == "genre":
+            search_result.genres = result
+        elif filter == "year":
+           search_result.year = result
+        elif filter == "rating":
+            search_result.rating = result
 
-    chosen_year = year_question()
+        another_filter = ask_another_filter_question()
+
+        if not another_filter:
+            print(search_result) #show the results
+            continue_search = ask_continue_question()
+            if not continue_search:
+                break
+
+def gather_search_params():
+
+    questions = [
+        {
+            "type": "list",
+            "message": "Choose one of the below options to filter your search",
+            "choices": [
+                Choice("genre", "Genre"),
+                Choice("year", "Year"),
+                Choice("rating", "Rating"),
+            ],
+            "instruction": "(Press 'enter' to confirm)",
+        }
+    ]
+
+    filter = prompt(questions=questions)[0]
+    result = None
+    if filter == "genre":
+        result = ask_genre_question()
+    elif filter == "year":
+        result = ask_year_question()
+    elif filter == "rating":
+        result = ask_rating_question()
+
+    return filter, result
+
     
-    chosen_rating = rating_question()
-    
-    print(chosen_genres, chosen_year, chosen_rating)
 
 
-while True:
+
+if __name__ == "__main__":
     main()
-
-    continue_ = continue_question()
-
-    if not continue_:
-        print("Thank you for using the IMDB Top 1000 Movies Finder")
-        exit(0)
 
 
 
