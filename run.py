@@ -138,9 +138,13 @@ def main():
             list_of_titles = data.search_movies_by_genre(search_result)
             display_search_results(list_of_titles, data)
         elif filter == "year":
-           search_result.year = result
+            search_result.year = result
+            list_of_titles = data.search_movies_by_year(search_result)
+            display_search_results(list_of_titles, data)
         elif filter == "rating":
             search_result.rating = result
+            list_of_titles = data.search_movies_by_rating(search_result)
+            display_search_results(list_of_titles, data)
 
         another_filter = ask_another_filter_question()
 
@@ -177,6 +181,7 @@ def gather_search_params():
     return filter, result
 
 def display_search_results(list_of_titles, data):
+    """Display search results and prompt user to choose a movie"""
     if isinstance(list_of_titles, list):
         choices = list_of_titles + ["Back to search"]
         questions = [
