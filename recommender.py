@@ -13,37 +13,25 @@ class Recommender:
     def __init__(self):
         self.data = pd.read_csv('imdb_top_1000.csv')
 
-    def search_movies_by_genre(self, search_result):
-        """Searches for movies by genre"""
+    def filter_movies(self, search_result):
+        """Filter movies based on search results"""
         movies = self.data
 
+        # Apply genre filter
         if search_result.genres:
-            search_result.genres.sort()
-            genre_pattern = ', '.join(search_result.genres) #Converting list to string
-            movies_found = movies.loc[movies["Genre"].str.contains(genre_pattern, case=False, na=False)]
-            movies_titles = movies_found["Series_Title"].tolist() #Converting series to list
-            return movies_titles if movies_titles else 'No movies found'
+            movies = movies.loc[movies["Genre"].apply(lambda g: all(genre in g for genre in search_result.genres))]
 
-
-    def search_movies_by_year(self, search_result):
-        """Searches for movies by year"""
-        movies = self.data
-
+        # Apply year filter
         if search_result.year:
-            movies_found = movies.loc[movies["Released_Year"] == search_result.year]
-            movies_titles = movies_found["Series_Title"].tolist() 
-            return movies_titles if movies_titles else 'No movies found'
+            movies = movies.loc[movies["Released_Year"] == search_result.year]
 
-
-
-    def search_movies_by_rating(self, search_result):
-        """Searches for movies by rating"""
-        movies = self.data
-
+        # Apply rating filter
         if search_result.rating:
-            movies_found = movies.loc[movies["Meta_score"] > int(search_result.rating)]
-            movies_titles = movies_found["Series_Title"].tolist()
-            return movies_titles if movies_titles else 'No movies found'
+            movies = movies.loc[movies["Meta_score"] > int(search_result.rating)]
+
+        # Return filtered movie titles
+        movies_titles = movies["Series_Title"].tolist()
+        return movies_titles if movies_titles else None
         
     def filtered_data(self, movie):
         """Returns the filtered data for a movie"""

@@ -40,7 +40,7 @@ def ask_genre_question():
                 "instruction": "(Press up/down arrows to see more options. Press 'space' to select, 'enter' to confirm)",
                 "validate": lambda result: len(result) < 4,
                 "invalid_message": "You can only choose up to 3 genres",
-            }
+            },
         ]
     )
 
@@ -141,21 +141,23 @@ def main():
         #search_results = search_movies(search_params)
         if filter == "genre":
             search_result.genres = result
-            list_of_titles = data.search_movies_by_genre(search_result)
+            list_of_titles = data.filter_movies(search_result)
             display_search_results(list_of_titles, data)
         elif filter == "year":
             search_result.year = result
-            list_of_titles = data.search_movies_by_year(search_result)
+            list_of_titles = data.filter_movies(search_result)
             display_search_results(list_of_titles, data)
         elif filter == "rating":
             search_result.rating = result
-            list_of_titles = data.search_movies_by_rating(search_result)
+            list_of_titles = data.filter_movies(search_result)
             display_search_results(list_of_titles, data)
 
         another_filter = ask_another_filter_question()
 
         if not another_filter:
             continue_search = ask_continue_question()
+            if continue_search:
+                search_result = rec.SearchResult()
             if not continue_search:
                 print("Thank you for using the IMDB Top 1000 Movies Finder")
                 break
