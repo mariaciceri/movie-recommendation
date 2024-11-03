@@ -133,7 +133,6 @@ def main():
     while True:
         filter, result = gather_search_params()
         #search_results = search_movies(search_params)
-        #display_search_results(search_results)
         if filter == "genre":
             search_result.genres = result
             list_of_titles = data.search_movies_by_genre(search_result)
@@ -179,11 +178,12 @@ def gather_search_params():
 
 def display_search_results(list_of_titles, data):
     if isinstance(list_of_titles, list):
+        choices = list_of_titles + ["Back to search"]
         questions = [
         {
             "type": "list",
             "message": "Choose a movie",
-            "choices": list_of_titles,
+            "choices": choices,
             "instruction": "(Press 'enter' to see full details)",
         }
     ]
@@ -192,6 +192,8 @@ def display_search_results(list_of_titles, data):
         return
 
     movie = prompt(questions=questions)[0]
+    if movie == "Back to search":
+        return
 
     print(data.filtered_data(movie))
 
