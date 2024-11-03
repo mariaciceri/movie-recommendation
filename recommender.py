@@ -23,13 +23,22 @@ class Recommender:
 
 
     def search_movies_by_year(self, search_result):
+        movies = self.data
+
         if search_result.year:
-            movies = movies.loc[movies["Year"] == search_result.year]
+            movies_found = movies.loc[movies["Released_Year"] == search_result.year]
+            movies_titles = movies_found["Series_Title"].tolist() 
+            return movies_titles if movies_titles else 'No movies found'
+
 
 
     def search_movies_by_rating(self, search_result):
+        movies = self.data
+
         if search_result.rating:
-            movies = movies.loc[movies["IMDB_Rating"] > search_result.rating]
+            movies_found = movies.loc[movies["Meta_score"] > int(search_result.rating)]
+            movies_titles = movies_found["Series_Title"].tolist()
+            return movies_titles if movies_titles else 'No movies found'
         
     def filtered_data(self, movie):
         filtered_data = self.data.query(f'Series_Title == "{movie}"')
