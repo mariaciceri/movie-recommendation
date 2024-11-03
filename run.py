@@ -132,13 +132,12 @@ def ask_continue_question():
 
 def main():
     """Main function to run the program"""
-    print("Welcome to the IMDB Top 1000 Movies Finder")
+    print("Welcome to the Top 1000 Movies Finder \n")
     data = rec.Recommender()
     search_result = rec.SearchResult()
     
     while True:
         filter, result = gather_search_params()
-        #search_results = search_movies(search_params)
         if filter == "genre":
             search_result.genres = result
             list_of_titles = data.filter_movies(search_result)
@@ -155,11 +154,12 @@ def main():
         another_filter = ask_another_filter_question()
 
         if not another_filter:
+            display_search_results(list_of_titles, data)
             continue_search = ask_continue_question()
             if continue_search:
                 search_result = rec.SearchResult()
             if not continue_search:
-                print("Thank you for using the IMDB Top 1000 Movies Finder")
+                print("\nThank you for using the IMDB Top 1000 Movies Finder")
                 break
 
 def gather_search_params():
@@ -192,7 +192,7 @@ def display_search_results(list_of_titles, data):
     """Display search results and prompt user to choose a movie"""
     if isinstance(list_of_titles, list):
         five_random_movies = random.sample(list_of_titles, min(5, len(list_of_titles)))
-        choices = five_random_movies + ["Back to search"]
+        choices = five_random_movies + ["Back to search"] + ["Exit"]
         questions = [
         {
             "type": "list",
@@ -208,6 +208,9 @@ def display_search_results(list_of_titles, data):
     movie = prompt(questions=questions)[0]
     if movie == "Back to search":
         return
+    if movie == "Exit":
+        print("\nThank you for using the Top 1000 Movies Finder")
+        return exit()
 
     print(data.filtered_data(movie))
 
