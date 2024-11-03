@@ -50,3 +50,5 @@ class Recommender:
         filtered_data = self.data.query(f'Series_Title == "{movie}"')
         columns_to_show = [self.data.columns[i] for i in [1, 2, 4, 5, 8, 9, 10]]
         return filtered_data[columns_to_show]
+    
+   

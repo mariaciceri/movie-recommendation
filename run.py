@@ -1,6 +1,7 @@
 from InquirerPy import prompt
 from InquirerPy.base.control import Choice
 import recommender as rec
+import random
 
 
 def ask_genre_question():
@@ -188,7 +189,8 @@ def gather_search_params():
 def display_search_results(list_of_titles, data):
     """Display search results and prompt user to choose a movie"""
     if isinstance(list_of_titles, list):
-        choices = list_of_titles + ["Back to search"]
+        five_random_movies = random.sample(list_of_titles, min(5, len(list_of_titles)))
+        choices = five_random_movies + ["Back to search"]
         questions = [
         {
             "type": "list",
