@@ -2,6 +2,7 @@ from InquirerPy import prompt
 from InquirerPy.base.control import Choice
 import recommender as rec
 import random
+from tabulate import tabulate
 
 
 def ask_genre_question():
@@ -136,6 +137,7 @@ def main():
     data = rec.Recommender()
     search_result = rec.SearchResult()
     
+    # Ask user to choose a filter to search movies
     while True:
         filter, result = gather_search_params()
         if filter == "genre":
@@ -151,11 +153,14 @@ def main():
             list_of_titles = data.filter_movies(search_result)
             display_search_results(list_of_titles, data)
 
+        # Ask user if they want to choose another filter
         another_filter = ask_another_filter_question()
 
+        # If user wants to choose another filter, continue the loop
         if not another_filter:
             display_search_results(list_of_titles, data)
             continue_search = ask_continue_question()
+            # If user wants to start a new search, reset search_result and continue the loop
             if continue_search:
                 search_result = rec.SearchResult()
             if not continue_search:
@@ -212,7 +217,8 @@ def display_search_results(list_of_titles, data):
         print("\nThank you for using the Top 1000 Movies Finder")
         return exit()
 
-    print(data.filtered_data(movie))
+
+    print(tabulate(data.filtered_data(movie), headers='keys', tablefmt='pretty', showindex=False))
 
 
 
