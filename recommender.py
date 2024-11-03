@@ -3,15 +3,18 @@ import pandas as pd
 
 @dataclass
 class SearchResult:
+    """Dataclass to store search results"""
     genres: list = None 
     year: int = None
     rating: int = None
 
 class Recommender:
+    """Recommender class to search movies by genre, year and rating"""
     def __init__(self):
         self.data = pd.read_csv('imdb_top_1000.csv')
 
     def search_movies_by_genre(self, search_result):
+        """Searches for movies by genre"""
         movies = self.data
 
         if search_result.genres:
@@ -23,6 +26,7 @@ class Recommender:
 
 
     def search_movies_by_year(self, search_result):
+        """Searches for movies by year"""
         movies = self.data
 
         if search_result.year:
@@ -33,6 +37,7 @@ class Recommender:
 
 
     def search_movies_by_rating(self, search_result):
+        """Searches for movies by rating"""
         movies = self.data
 
         if search_result.rating:
@@ -41,6 +46,7 @@ class Recommender:
             return movies_titles if movies_titles else 'No movies found'
         
     def filtered_data(self, movie):
+        """Returns the filtered data for a movie"""
         filtered_data = self.data.query(f'Series_Title == "{movie}"')
         columns_to_show = [self.data.columns[i] for i in [1, 2, 4, 5, 8, 9, 10]]
         return filtered_data[columns_to_show]

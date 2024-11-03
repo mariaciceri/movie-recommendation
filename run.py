@@ -1,10 +1,10 @@
 from InquirerPy import prompt
 from InquirerPy.base.control import Choice
 import recommender as rec
-import pandas as pd 
 
 
 def ask_genre_question():
+    """Ask user to choose a genre"""
     movies_genre = [
         "Film-Noir",
         "Drama",
@@ -58,6 +58,7 @@ def validate_year(year):
         return False
     
 def ask_year_question():
+    """Ask user to enter a year between 1920 and 2020"""
     year_questions = prompt(
         [
             {
@@ -85,6 +86,7 @@ def validate_rating(rating):
         return False
     
 def ask_rating_question():
+    """Ask user to enter a rating between 0 and 100"""
     rating_questions = prompt(
         [
             {
@@ -100,6 +102,7 @@ def ask_rating_question():
     return rating_questions[0]
     
 def ask_another_filter_question():
+    """Ask user if they want to choose another filter"""
     another_filter_question = prompt(
         [
             {
@@ -113,6 +116,7 @@ def ask_another_filter_question():
     return another_filter_question[0]
 
 def ask_continue_question():
+    """Ask user if they want to continue searching"""
     continue_question = prompt(
         [
             {
@@ -126,6 +130,7 @@ def ask_continue_question():
     return continue_question[0]
 
 def main():
+    """Main function to run the program"""
     print("Welcome to the IMDB Top 1000 Movies Finder")
     data = rec.Recommender()
     search_result = rec.SearchResult()
@@ -155,7 +160,7 @@ def main():
                 break
 
 def gather_search_params():
-
+    """Prompt user to choose a filter to search movies"""
     questions = [
         {
             "type": "list",
