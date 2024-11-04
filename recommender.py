@@ -1,12 +1,14 @@
 from dataclasses import dataclass
 import pandas as pd 
 
+
 @dataclass
 class SearchResult:
     """Dataclass to store search results"""
     genres: list = None 
     year: int = None
     rating: int = None
+
 
 class Recommender:
     """Recommender class to search movies by genre, year and rating"""
