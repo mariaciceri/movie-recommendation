@@ -13,6 +13,7 @@ RESET = style('reset')
 
 def ask_genre_question():
     """Ask user to choose a genre"""
+
     movies_genre = [
         "Film-Noir",
         "Drama",
@@ -56,6 +57,7 @@ def ask_genre_question():
 
 def validate_year(year):
     """Validate if the year is between 1920 and 2020 or not provided"""
+
     try:
         if year == "":
             return True
@@ -88,6 +90,7 @@ def ask_year_question():
 
 def validate_rating(rating):
     """Validate if the rating is between 0 and 100 or not provided"""
+
     try:
         if rating == "":
             return True
@@ -154,6 +157,7 @@ def ask_continue_question():
 
 def main():
     """Main function to run the program"""
+
     print(f"{LIGHT_MAGENTA}Welcome to the Top 1000 Movies Finder \n{RESET}")
     data = rec.Recommender()
     search_result = rec.SearchResult()
@@ -161,23 +165,25 @@ def main():
     # Ask user to choose a filter to search movies
     while True:
         filter, result = gather_search_params()
+        list_of_titles = None
         if filter == "genre":
             search_result.genres = result
             list_of_titles = data.filter_movies(search_result)
-            print(f"{LIGHT_YELLOW}Displaying movies with the following genres: {', '.join(search_result.genres)}{RESET}")
-            display_search_results(list_of_titles, data, "Back to search, Exit")
+            message = f"Displaying up to 5 random movies with the following genres: {', '.join(search_result.genres)}"   
         elif filter == "year":
             search_result.year = result
             list_of_titles = data.filter_movies(search_result)
             if(search_result.year == "2020"):
-                print(f"{LIGHT_YELLOW}Displaying movies released in the year: {search_result.year}{RESET}")
+                message = f"Displaying up to 5 random movies released in the year: {search_result.year}"
             else:
-                print(f"{LIGHT_YELLOW}Displaying movies released in the year: {search_result.year} until the end of the decade{RESET}")
-            display_search_results(list_of_titles, data, "Back to search, Exit")
+                message = f"Displaying up to 5 random movies released in the year: {search_result.year} until the end of the decade"  
         elif filter == "rating":
             search_result.rating = result
             list_of_titles = data.filter_movies(search_result)
-            print(f"{LIGHT_YELLOW}Displaying movies with a rating equal or greater than: {search_result.rating}{RESET}")
+            message = f"Displaying up to 5 random movies with a rating equal or greater than: {search_result.rating}"
+            
+        if list_of_titles:
+            print(f"{LIGHT_YELLOW}{message}{RESET}")
             display_search_results(list_of_titles, data, "Back to search, Exit")
 
         # Ask user if they want to choose another filter
@@ -191,14 +197,14 @@ def main():
                 (f" Rating: {search_result.rating}." if search_result.rating else "")
                 )
 
-            print(f"{LIGHT_YELLOW}Your filters are: {final_display}{RESET}")
+            print(f"{LIGHT_YELLOW}Displaying up to 5 random movies with filters: {final_display}.{RESET}")
             display_search_results(list_of_titles, data, "Start over, Exit")
             
             continue_search = ask_continue_question()
             # If user wants to start a new search, reset search_result and continue the loop
             if continue_search:
                 search_result = rec.SearchResult()
-            if not continue_search:
+            else:
                 print(f"{LIGHT_MAGENTA}\nThank you for using the IMDB Top 1000 Movies Finder{RESET}")
                 break
 
@@ -252,9 +258,8 @@ def display_search_results(list_of_titles, data, extra_options):
         return
 
     answer = prompt(questions=questions)[0]
-    if answer == "Back to search":
-        return
-    if answer == "Start over":
+
+    if answer == "Back to search" or answer == "Start over":
         return
     if answer == "Exit":
         print(f"{LIGHT_MAGENTA}\nThank you for using the Top 1000 Movies Finder{RESET}")
