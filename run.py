@@ -218,7 +218,14 @@ def display_search_results(list_of_titles, data):
         return exit()
 
 
-    print(tabulate(data.filtered_data(movie), headers='keys', tablefmt='pretty', showindex=False))
+    print(tabulate(data.filtered_data(movie), 
+                    headers=["Title", "Year", "Runtime", "Meta Score", "Director", "Star"],
+                    tablefmt='fancy_grid',
+                    maxcolwidths=8,
+                    numalign="center",
+                    stralign="center",
+                    colalign=("center", "center", "right"),
+                    showindex=False))
 
 
 
