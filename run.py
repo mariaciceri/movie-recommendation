@@ -3,6 +3,11 @@ from InquirerPy.base.control import Choice
 import recommender as rec
 import random
 from tabulate import tabulate
+from colored import fore, style
+MAGENTA = fore('magenta')
+LIGHT_MAGENTA = fore('light_magenta')
+RED = fore('red')
+RESET = style('reset')
 
 
 def ask_genre_question():
@@ -32,13 +37,14 @@ def ask_genre_question():
         "Documentary",
     ]
 
+    print(f"{MAGENTA}Choose up to 3 genres to filter your search{RESET}")
     genre_questions = prompt(
         [
             {
                 "type": "checkbox",
-                "message": "Choose a genre",
+                "message": ">",
                 "choices": movies_genre,
-                "instruction": "(Press up/down arrows to see more options. Press 'space' to select, 'enter' to confirm)",
+                "instruction": "Press up/down arrows to see more options. Press 'space' to select, 'enter' to confirm",
                 "validate": lambda result: len(result) < 4,
                 "invalid_message": "You can only choose up to 3 genres",
             },
@@ -63,12 +69,14 @@ def validate_year(year):
 
 def ask_year_question():
     """Ask user to enter a year between 1920 and 2020"""
+
+    print(f"{MAGENTA}Enter a year between 1920 and 2020{RESET}")
     year_questions = prompt(
         [
             {
                 "type": "input",
-                "message": "Enter a year between 1920 and 2020",
-                "instruction": "(Type your answer and press enter to confirm)",
+                "message": ">",
+                "instruction": "Type your answer and press enter to confirm",
                 "validate": lambda result: validate_year(result),
                 "invalid_message": "Year must be between 1920 and 2020",
             }
@@ -93,12 +101,14 @@ def validate_rating(rating):
 
 def ask_rating_question():
     """Ask user to enter a rating between 0 and 100"""
+
+    print(f"{MAGENTA}Enter a rating between 0 and 100{RESET}")
     rating_questions = prompt(
         [
             {
                 "type": "input",
-                "message": "Enter a rating between 0 and 100",
-                "instruction": "(Type your answer and press enter to confirm)",
+                "message": ">",
+                "instruction": "Type your answer and press enter to confirm",
                 "validate": lambda result: validate_rating(result),
                 "invalid_message": "Rating must be between 0 and 100",
             }
@@ -110,11 +120,13 @@ def ask_rating_question():
 
 def ask_another_filter_question():
     """Ask user if they want to choose another filter"""
+
+    print(f"{MAGENTA}Do you want to choose another filter?{RESET}")
     another_filter_question = prompt(
         [
             {
                 "type": "confirm",
-                "message": "Do you want to choose another filter?",
+                "message": "Yes or No",
                 "default": False,
             }
         ]
@@ -125,11 +137,13 @@ def ask_another_filter_question():
 
 def ask_continue_question():
     """Ask user if they want to continue searching"""
+
+    print(f"{MAGENTA}Do you want to search anew?{RESET}")
     continue_question = prompt(
         [
             {
                 "type": "confirm",
-                "message": "Do you want to search anew?",
+                "message": "Yes or No",
                 "default": True,
             }
         ]
@@ -140,7 +154,7 @@ def ask_continue_question():
 
 def main():
     """Main function to run the program"""
-    print("Welcome to the Top 1000 Movies Finder \n")
+    print(f"{LIGHT_MAGENTA}Welcome to the Top 1000 Movies Finder \n{RESET}")
     data = rec.Recommender()
     search_result = rec.SearchResult()
     
@@ -171,16 +185,18 @@ def main():
             if continue_search:
                 search_result = rec.SearchResult()
             if not continue_search:
-                print("\nThank you for using the IMDB Top 1000 Movies Finder")
+                print(f"{LIGHT_MAGENTA}\nThank you for using the IMDB Top 1000 Movies Finder{RESET}")
                 break
 
 
 def gather_search_params():
     """Prompt user to choose a filter to search movies"""
+
+    print(f"{MAGENTA}Choose a filter to search movies{RESET}")
     questions = [
         {
             "type": "list",
-            "message": "Choose one of the below options to filter your search",
+            "message": ">",
             "choices": [
                 Choice("genre", "Genre"),
                 Choice("year", "Year"),
@@ -207,23 +223,25 @@ def display_search_results(list_of_titles, data, extra_options):
     if isinstance(list_of_titles, list):
         five_random_movies = random.sample(list_of_titles, min(5, len(list_of_titles)))
         choices = five_random_movies + extra_options.split(", ")
+
+        print(f"{MAGENTA}Choose a title below to see full details{RESET}")
         questions = [
         {
             "type": "list",
-            "message": "Choose a movie",
+            "message": ">",
             "choices": choices,
-            "instruction": "(Press 'enter' to see full details)",
+            "instruction": "(Press 'enter' to select)",
         }
     ]
     else:
-        print("No movies found")
+        print(f"{RED}No movies found, try another search{RESET}")
         return
 
     movie = prompt(questions=questions)[0]
     if movie == "Back to search":
         return
     if movie == "Exit":
-        print("\nThank you for using the Top 1000 Movies Finder")
+        print(f"{LIGHT_MAGENTA}\nThank you for using the Top 1000 Movies Finder{RESET}")
         return exit()
 
 
