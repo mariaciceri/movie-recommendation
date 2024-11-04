@@ -5,9 +5,9 @@ import pandas as pd
 @dataclass
 class SearchResult:
     """Dataclass to store search results"""
-    genres: list = None 
-    year: int = None
-    rating: int = None
+    genres: list = ""
+    year: int = ""
+    rating: int = ""
 
 
 class Recommender:

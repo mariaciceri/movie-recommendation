@@ -7,6 +7,7 @@ from colored import fore, style
 MAGENTA = fore('magenta')
 LIGHT_MAGENTA = fore('light_magenta')
 RED = fore('red')
+LIGHT_YELLOW = fore('light_yellow')
 RESET = style('reset')
 
 
@@ -34,7 +35,6 @@ def ask_genre_question():
         "Music",
         "Sport",
         "Musical",
-        "Documentary",
     ]
 
     print(f"{MAGENTA}Choose up to 3 genres to filter your search{RESET}")
@@ -164,22 +164,36 @@ def main():
         if filter == "genre":
             search_result.genres = result
             list_of_titles = data.filter_movies(search_result)
+            print(f"{LIGHT_YELLOW}Displaying movies with the following genres: {', '.join(search_result.genres)}{RESET}")
             display_search_results(list_of_titles, data, "Back to search, Exit")
         elif filter == "year":
             search_result.year = result
             list_of_titles = data.filter_movies(search_result)
+            if(search_result.year == "2020"):
+                print(f"{LIGHT_YELLOW}Displaying movies released in the year: {search_result.year}{RESET}")
+            else:
+                print(f"{LIGHT_YELLOW}Displaying movies released in the year: {search_result.year} until the end of the decade{RESET}")
             display_search_results(list_of_titles, data, "Back to search, Exit")
         elif filter == "rating":
             search_result.rating = result
             list_of_titles = data.filter_movies(search_result)
+            print(f"{LIGHT_YELLOW}Displaying movies with a rating equal or greater than: {search_result.rating}{RESET}")
             display_search_results(list_of_titles, data, "Back to search, Exit")
 
         # Ask user if they want to choose another filter
         another_filter = ask_another_filter_question()
 
-        # If user wants to choose another filter, continue the loop
+        #If user doesn't want to choose another filter, show the final filters and display the search results
         if not another_filter:
-            display_search_results(list_of_titles, data, "Exit")
+            final_display = (
+                (f"Genres: {', '.join(search_result.genres)};" if search_result.genres else "") +
+                (f" Year: {search_result.year};" if search_result.year else "") +
+                (f" Rating: {search_result.rating}." if search_result.rating else "")
+                )
+
+            print(f"{LIGHT_YELLOW}Your filters are: {final_display}{RESET}")
+            display_search_results(list_of_titles, data, "Start over, Exit")
+            
             continue_search = ask_continue_question()
             # If user wants to start a new search, reset search_result and continue the loop
             if continue_search:
@@ -237,15 +251,17 @@ def display_search_results(list_of_titles, data, extra_options):
         print(f"{RED}No movies found, try another search{RESET}")
         return
 
-    movie = prompt(questions=questions)[0]
-    if movie == "Back to search":
+    answer = prompt(questions=questions)[0]
+    if answer == "Back to search":
         return
-    if movie == "Exit":
+    if answer == "Start over":
+        return
+    if answer == "Exit":
         print(f"{LIGHT_MAGENTA}\nThank you for using the Top 1000 Movies Finder{RESET}")
         return exit()
 
 
-    print(tabulate(data.filtered_data(movie), 
+    print(tabulate(data.filtered_data(answer), 
                     headers=["Title", "Year", "Runtime", "Meta Score", "Director", "Star"],
                     tablefmt='fancy_grid',
                     maxcolwidths=8,
