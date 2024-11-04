@@ -1,1 +1,4 @@
-# Your requirements go here
+pip install pandas
+pip install InquirerPy
+pip install tabulate
+pip install colored
