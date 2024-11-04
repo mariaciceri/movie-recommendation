@@ -25,7 +25,9 @@ class Recommender:
 
         # Apply year filter
         if search_result.year:
-            movies = movies.loc[movies["Released_Year"] == search_result.year]
+            #calculate the end year of the decade
+            end_year = (int(search_result.year) // 10 + 1) * 10 - 1
+            movies = movies.loc[(movies["Released_Year"] >= search_result.year) & (movies["Released_Year"] <= str(end_year))]
 
         # Apply rating filter
         if search_result.rating:
