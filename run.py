@@ -47,6 +47,7 @@ def ask_genre_question():
 
     return genre_questions[0]
 
+
 def validate_year(year):
     """Validate if the year is between 1920 and 2020 or not provided"""
     try:
@@ -59,6 +60,7 @@ def validate_year(year):
     except ValueError:
         return False
     
+
 def ask_year_question():
     """Ask user to enter a year between 1920 and 2020"""
     year_questions = prompt(
@@ -75,6 +77,7 @@ def ask_year_question():
 
     return year_questions[0]
     
+
 def validate_rating(rating):
     """Validate if the rating is between 0 and 100 or not provided"""
     try:
@@ -87,6 +90,7 @@ def validate_rating(rating):
     except ValueError:
         return False
     
+
 def ask_rating_question():
     """Ask user to enter a rating between 0 and 100"""
     rating_questions = prompt(
@@ -103,6 +107,7 @@ def ask_rating_question():
 
     return rating_questions[0]
     
+
 def ask_another_filter_question():
     """Ask user if they want to choose another filter"""
     another_filter_question = prompt(
@@ -116,6 +121,7 @@ def ask_another_filter_question():
     )
 
     return another_filter_question[0]
+
 
 def ask_continue_question():
     """Ask user if they want to continue searching"""
@@ -131,6 +137,7 @@ def ask_continue_question():
 
     return continue_question[0]
 
+
 def main():
     """Main function to run the program"""
     print("Welcome to the Top 1000 Movies Finder \n")
@@ -143,22 +150,22 @@ def main():
         if filter == "genre":
             search_result.genres = result
             list_of_titles = data.filter_movies(search_result)
-            display_search_results(list_of_titles, data)
+            display_search_results(list_of_titles, data, "Back to search, Exit")
         elif filter == "year":
             search_result.year = result
             list_of_titles = data.filter_movies(search_result)
-            display_search_results(list_of_titles, data)
+            display_search_results(list_of_titles, data, "Back to search, Exit")
         elif filter == "rating":
             search_result.rating = result
             list_of_titles = data.filter_movies(search_result)
-            display_search_results(list_of_titles, data)
+            display_search_results(list_of_titles, data, "Back to search, Exit")
 
         # Ask user if they want to choose another filter
         another_filter = ask_another_filter_question()
 
         # If user wants to choose another filter, continue the loop
         if not another_filter:
-            display_search_results(list_of_titles, data)
+            display_search_results(list_of_titles, data, "Exit")
             continue_search = ask_continue_question()
             # If user wants to start a new search, reset search_result and continue the loop
             if continue_search:
@@ -166,6 +173,7 @@ def main():
             if not continue_search:
                 print("\nThank you for using the IMDB Top 1000 Movies Finder")
                 break
+
 
 def gather_search_params():
     """Prompt user to choose a filter to search movies"""
@@ -193,11 +201,12 @@ def gather_search_params():
 
     return filter, result
 
-def display_search_results(list_of_titles, data):
+
+def display_search_results(list_of_titles, data, extra_options):
     """Display search results and prompt user to choose a movie"""
     if isinstance(list_of_titles, list):
         five_random_movies = random.sample(list_of_titles, min(5, len(list_of_titles)))
-        choices = five_random_movies + ["Back to search"] + ["Exit"]
+        choices = five_random_movies + extra_options.split(", ")
         questions = [
         {
             "type": "list",
@@ -224,7 +233,6 @@ def display_search_results(list_of_titles, data):
                     maxcolwidths=8,
                     numalign="center",
                     stralign="center",
-                    colalign=("center", "center", "right"),
                     showindex=False))
 
 
