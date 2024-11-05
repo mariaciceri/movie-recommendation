@@ -1,9 +1,11 @@
+import random
 from InquirerPy import prompt
 from InquirerPy.base.control import Choice
-import recommender as rec
-import random
 from tabulate import tabulate
 from colored import fore, style
+import recommender as rec
+
+# Set up colors for the text
 GREEN = fore('green')
 L_MAGENTA = fore('light_magenta')
 RED = fore('red')
@@ -199,7 +201,7 @@ or greater than: {search_result.rating}""")
                 list_of_titles, data, "Back to search, Exit"
                 )
         else:
-            print(f"{RED}No movies found, try another search{RESET}")
+            print(f"{RED}No movies found, try changing your filters{RESET}")
 
         # Ask user if they want to choose another filter
         another_filter = ask_another_filter_question()
@@ -278,7 +280,7 @@ def display_search_results(list_of_titles, data, extra_options):
             }
         ]
     else:
-        print(f"{RED}No movies found, try another search{RESET}")
+        print(f"{RED}No movies found, try changing your filters{RESET}")
         return
 
     answer = prompt(questions=questions)[0]
