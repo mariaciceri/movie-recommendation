@@ -198,6 +198,8 @@ or greater than: {search_result.rating}""")
             display_search_results(
                 list_of_titles, data, "Back to search, Exit"
                 )
+        else:
+            print(f"{RED}No movies found, try another search{RESET}")
 
         # Ask user if they want to choose another filter
         another_filter = ask_another_filter_question()
