@@ -29,10 +29,29 @@ None of the filter are mandatory, meaning that if the user selects a filter and 
 ## Features
 ### Existing Features
 
-+ 
++ Interactive menu to choose filter;
 
-### Future Filters
+![Filter selection menu](/docs/images/welcome-message.png)
 
++ Checkbox style genre selection;
+
+![Genre selection manu](/docs/images/genre-selection.png)
+
++ Movie titles displayed in a interactive menu:
+
+![Movie titles display](/docs/images/movie-title-display.png)
+
++ Movie details displayed in a table for readability:
+
+![Table with movie information](/docs/images/full-details-display.png)
+
++ Possibility to filter movies using one, two or all categories;
++ Possibility to start over the search;
+
+
+### Future Features
+
++ Allow user to mark movies as seen and not display them anymore;
 
 ## Technologies
 
