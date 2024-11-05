@@ -197,7 +197,7 @@ def main():
                 (f" Rating: {search_result.rating}." if search_result.rating else "")
                 )
 
-            print(f"{LIGHT_YELLOW}Displaying up to 5 random movies with filters: {final_display}.{RESET}")
+            print(f"{LIGHT_YELLOW}Your last (up to) 5 random movies filtered by {final_display} are:{RESET}")
             display_search_results(list_of_titles, data, "Start over, Exit")
             
             continue_search = ask_continue_question()
