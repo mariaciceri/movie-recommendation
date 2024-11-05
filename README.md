@@ -119,3 +119,7 @@ None of the filter are mandatory, meaning that if the user selects a filter and 
 
 ## Credits
 
++ Video on how to use [Pandas](https://www.youtube.com/watch?v=DkjCaAMBGWM&ab_channel=RobMulla) is from Rob Mulla channel;
++ Post on how to use [Tabulate](https://www.datacamp.com/tutorial/python-tabulate?dc_referrer=https%3A%2F%2Fwww.google.com%2F) is from Datacamp;
++ Dataset is taken from [Kaggle](https://www.kaggle.com/);
+
