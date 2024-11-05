@@ -4,7 +4,7 @@ import recommender as rec
 import random
 from tabulate import tabulate
 from colored import fore, style
-MAGENTA = fore('magenta')
+BLUE = fore('blue')
 LIGHT_MAGENTA = fore('light_magenta')
 RED = fore('red')
 LIGHT_YELLOW = fore('light_yellow')
@@ -38,7 +38,7 @@ def ask_genre_question():
         "Musical",
     ]
 
-    print(f"{MAGENTA}Choose up to 3 genres to filter your search{RESET}")
+    print(f"{BLUE}Choose up to 3 genres to filter your search{RESET}")
     genre_questions = prompt(
         [
             {
@@ -72,7 +72,7 @@ def validate_year(year):
 def ask_year_question():
     """Ask user to enter a year between 1920 and 2020"""
 
-    print(f"{MAGENTA}Enter a year between 1920 and 2020{RESET}")
+    print(f"{BLUE}Enter a year between 1920 and 2020{RESET}")
     year_questions = prompt(
         [
             {
@@ -105,7 +105,7 @@ def validate_rating(rating):
 def ask_rating_question():
     """Ask user to enter a rating between 0 and 100"""
 
-    print(f"{MAGENTA}Enter a rating between 0 and 100{RESET}")
+    print(f"{BLUE}Enter a rating between 0 and 100{RESET}")
     rating_questions = prompt(
         [
             {
@@ -124,7 +124,7 @@ def ask_rating_question():
 def ask_another_filter_question():
     """Ask user if they want to choose another filter"""
 
-    print(f"{MAGENTA}Do you want to choose another filter?{RESET}")
+    print(f"{BLUE}Do you want to choose another filter?{RESET}")
     another_filter_question = prompt(
         [
             {
@@ -141,7 +141,7 @@ def ask_another_filter_question():
 def ask_continue_question():
     """Ask user if they want to continue searching"""
 
-    print(f"{MAGENTA}Do you want to search anew?{RESET}")
+    print(f"{BLUE}Do you want to search anew?{RESET}")
     continue_question = prompt(
         [
             {
@@ -212,7 +212,7 @@ def main():
 def gather_search_params():
     """Prompt user to choose a filter to search movies"""
 
-    print(f"{MAGENTA}Choose a filter to search movies{RESET}")
+    print(f"{BLUE}Choose a filter to search movies{RESET}")
     questions = [
         {
             "type": "list",
@@ -244,7 +244,7 @@ def display_search_results(list_of_titles, data, extra_options):
         five_random_movies = random.sample(list_of_titles, min(5, len(list_of_titles)))
         choices = five_random_movies + extra_options.split(", ")
 
-        print(f"{MAGENTA}Choose a title below to see full details{RESET}")
+        print(f"{BLUE}Choose a title below to see full details{RESET}")
         questions = [
         {
             "type": "list",
