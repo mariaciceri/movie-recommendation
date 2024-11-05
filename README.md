@@ -42,6 +42,18 @@ None of the filter are mandatory, meaning that if the user selects a filter and 
 
 ## Deployment
 
++ The project was deployed using Code Institute's mock terminal for Heroku, following this steps:
+    + On the terminal, paste `kaggle datasets download harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows`;
+    + On the terminal, create a .kaggle directory (`mkdir .kaggle`) on your main directory
+    + Move the downloaded file(named 'kaggle') into .kaggle using the command `mv {source_path} {destination_path}`;
+    + Clone the [repository](https://github.com/mariaciceri/movie-recommendation) from GitHub page;
+    + Create a new Heroku app;
+    + In the Settings tab, set the buildpacks to Python and NodeJS in that order;
+    + In the Settings tab, set two the Config Vars:
+        + CREDS(key): The information inside the kaggle file you downloaded previously(value)
+        + PORT(key): 8000(value)
+    + In the Deploy tab, scroll down to Manual Deploy, confirm that you are deploying from main and click on "Deploy Branch"
+    + Alternatively, enable "Enable Automatic Deploys"
 
 ## Testing
 
