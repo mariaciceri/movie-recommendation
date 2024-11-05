@@ -17,6 +17,7 @@ class Recommender:
         self.data['Meta_score'] = (
             self.data['Meta_score'].fillna('Not in database')
             )
+        self.data["Meta_score"] = self.data["Meta_score"].astype(str)
 
     def filter_movies(self, search_result):
         """Filter movies based on search results"""
@@ -39,7 +40,7 @@ class Recommender:
         # Apply rating filter
         if search_result.rating:
             movies = movies.loc[
-                movies["Meta_score"] > int(search_result.rating)]
+                movies["Meta_score"] > search_result.rating]
 
         # Return filtered movie titles
         movies_titles = movies["Series_Title"].tolist()
