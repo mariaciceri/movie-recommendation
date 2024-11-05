@@ -67,7 +67,7 @@ def validate_year(year):
         return True
     except ValueError:
         return False
-    
+
 
 def ask_year_question():
     """Ask user to enter a year between 1920 and 2020"""
@@ -86,7 +86,7 @@ def ask_year_question():
     )
 
     return year_questions[0]
-    
+
 
 def validate_rating(rating):
     """Validate if the rating is between 0 and 100 or not provided"""
@@ -100,7 +100,7 @@ def validate_rating(rating):
         return True
     except ValueError:
         return False
-    
+
 
 def ask_rating_question():
     """Ask user to enter a rating between 0 and 100"""
@@ -119,7 +119,7 @@ def ask_rating_question():
     )
 
     return rating_questions[0]
-    
+
 
 def ask_another_filter_question():
     """Ask user if they want to choose another filter"""
@@ -161,7 +161,7 @@ def main():
     print(f"{LIGHT_MAGENTA}Welcome to the Top 1000 Movies Finder \n{RESET}")
     data = rec.Recommender()
     search_result = rec.SearchResult()
-    
+
     # Ask user to choose a filter to search movies
     while True:
         filter, result = gather_search_params()
@@ -169,19 +169,19 @@ def main():
         if filter == "genre":
             search_result.genres = result
             list_of_titles = data.filter_movies(search_result)
-            message = f"Displaying up to 5 random movies with the following genres: {', '.join(search_result.genres)}"   
+            message = f"Displaying up to 5 random movies with the following genres: {', '.join(search_result.genres)}"
         elif filter == "year":
             search_result.year = result
             list_of_titles = data.filter_movies(search_result)
-            if(search_result.year == "2020"):
+            if (search_result.year == "2020"):
                 message = f"Displaying up to 5 random movies released in the year: {search_result.year}"
             else:
-                message = f"Displaying up to 5 random movies released in the year: {search_result.year} until the end of the decade"  
+                message = f"Displaying up to 5 random movies released in the year: {search_result.year} until the end of the decade"
         elif filter == "rating":
             search_result.rating = result
             list_of_titles = data.filter_movies(search_result)
             message = f"Displaying up to 5 random movies with a rating equal or greater than: {search_result.rating}"
-            
+
         if list_of_titles:
             print(f"{LIGHT_YELLOW}{message}{RESET}")
             display_search_results(list_of_titles, data, "Back to search, Exit")
@@ -189,7 +189,7 @@ def main():
         # Ask user if they want to choose another filter
         another_filter = ask_another_filter_question()
 
-        #If user doesn't want to choose another filter, show the final filters and display the search results
+        # If user doesn't want to choose another filter, show the final filters and display the search results
         if not another_filter:
             final_display = (
                 (f"Genres: {', '.join(search_result.genres)};" if search_result.genres else "") +
@@ -199,7 +199,7 @@ def main():
 
             print(f"{LIGHT_YELLOW}Your last (up to) 5 random movies filtered by {final_display} are:{RESET}")
             display_search_results(list_of_titles, data, "Start over, Exit")
-            
+
             continue_search = ask_continue_question()
             # If user wants to start a new search, reset search_result and continue the loop
             if continue_search:
@@ -246,13 +246,13 @@ def display_search_results(list_of_titles, data, extra_options):
 
         print(f"{BLUE}Choose a title below to see full details{RESET}")
         questions = [
-        {
-            "type": "list",
-            "message": ">",
-            "choices": choices,
-            "instruction": "(Press 'enter' to select)",
-        }
-    ]
+            {
+                "type": "list",
+                "message": ">",
+                "choices": choices,
+                "instruction": "(Press 'enter' to select)",
+            }
+        ]
     else:
         print(f"{RED}No movies found, try another search{RESET}")
         return
@@ -265,19 +265,14 @@ def display_search_results(list_of_titles, data, extra_options):
         print(f"{LIGHT_MAGENTA}\nThank you for using the Top 1000 Movies Finder{RESET}")
         return exit()
 
-
-    print(tabulate(data.filtered_data(answer), 
-                    headers=["Title", "Year", "Runtime", "Meta Score", "Director", "Star"],
-                    tablefmt='fancy_grid',
-                    maxcolwidths=8,
-                    numalign="center",
-                    stralign="center",
-                    showindex=False))
-
+    print(tabulate(data.filtered_data(answer),
+                   headers=["Title", "Year", "Runtime", "Meta Score", "Director", "Star"],
+                   tablefmt='fancy_grid',
+                   maxcolwidths=8,
+                   numalign="center",
+                   stralign="center",
+                   showindex=False))
 
 
 if __name__ == "__main__":
     main()
-
-
-
