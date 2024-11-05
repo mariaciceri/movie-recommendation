@@ -65,10 +65,22 @@ None of the filter are mandatory, meaning that if the user selects a filter and 
 ### Bugs
 #### Solved Bugs
 
++ Bug: When searching for rating, a TypeError was raised indicating that it was trying to compare string and integer.
+    + Fix: Convert the user input into integer to match the value from the dataset.
++ Bug: After calculating how long until the end of the decade, retrieving data was raising a TypeError.
+    + Fix: Convert the year into string to match the value from the dataset.
++ Bug: When "Exit" pressed, it was not ending the program but instead asking if user wanted t start over:
+    + Fix: Return exit() method to break the loop.
++ Bug: When more than one genre was selected and not in the same order as in the dataset, no movie was returned.
+    + Fix: use aapply() method to search with lambda function using all() to check if each genre was in the whole genre string in the dataset.
+
 #### Unsolved Bugs
 
-#### validator Testing
++ No known unsolved bug is present in the project.
 
+#### Validator Testing
+
++ No errors were found by the PEP8.
 
 ## Credits
 
