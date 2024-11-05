@@ -36,9 +36,13 @@ None of the filter are mandatory, meaning that if the user selects a filter and 
 
 ## Technologies
 
-
-
-## Data Model
++ [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) is the language used in the program;
++ [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/) is the Python Package used to create the interactive command-line interface;
++ [Pandas](https://pandas.pydata.org/) is the library used to read and retrieve data from the dataset;
++ [Tabulate](https://pypi.org/project/tabulate/) is the library used to style the table with movie information to the user;
++ [Colored](https://pypi.org/project/colored/) is used to style the print statements in the program;
++ [Python Classes](https://docs.python.org/3/tutorial/classes.html) is used to manage dealing with dataset requests;
++ [Data Class](https://docs.python.org/3/library/dataclasses.html) is used to store filters chosen by the user.
 
 ## Deployment
 
@@ -56,7 +60,7 @@ None of the filter are mandatory, meaning that if the user selects a filter and 
     + Alternatively, enable "Enable Automatic Deploys"
 
 ## Testing
-
+### Manual Testing
 + The project was manually tested by doing the following:
     + When selecting filters: press arrow up/down key to movie the cursor:
         + It moves the cursor up and down, changing the color of the selected filter.
