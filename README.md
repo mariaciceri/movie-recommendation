@@ -77,6 +77,10 @@ This flow chart demonstrates how the program runs:
 + [Python Classes](https://docs.python.org/3/tutorial/classes.html) is used to structure code in a way that makes it more readable, reusable, and maintainable. By modeling real-world entities and concepts, classes help encapsulate data and behavior, making code more intuitive and easier to manage.
 In this project, the OOP principles of encapsulation and separation of concerns are applied as the main class "Recommender" was created to separate the logic that handles the dataset from the code that manages user interactions. This allowed the project to be much easier to debug.
 + [Data Class](https://docs.python.org/3/library/dataclasses.html) is used to store filters chosen by the user.
++ [Gitpod](https://gitpod.io/) with [VSCode](https://code.visualstudio.com/) desktop extension is the IDE for the project;
++ [Git](https://git-scm.com/) is used for version control;
++ [Github](https://github.com/) is used for hosting the page;
++ [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) is used as the start script to run the Code Institute mock terminal on the browser;
 
 ## Deployment
 
