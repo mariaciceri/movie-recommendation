@@ -85,7 +85,7 @@ def ask_year_question():
                 "message": ">",
                 "instruction": "Type your answer and press enter to confirm",
                 "validate": lambda result: validate_year(result),
-                "invalid_message": "Year must be between 1920 and 2020",
+                "invalid_message": "Year must be a whole number between 1920 and 2020",
             }
         ]
     )
@@ -118,7 +118,7 @@ def ask_rating_question():
                 "message": ">",
                 "instruction": "Type your answer and press enter to confirm",
                 "validate": lambda result: validate_rating(result),
-                "invalid_message": "Rating must be between 0 and 100",
+                "invalid_message": "Rating must be a whole number between 0 and 100",
             }
         ]
     )
@@ -158,80 +158,6 @@ def ask_continue_question():
     )
 
     return continue_question[0]
-
-
-def main():
-    """Main function to run the program"""
-
-    print(f"\n{_L_MAGENTA}Welcome to the Top 1000 Movies Finder{_RESET}")
-    data = rec.Recommender()
-    search_result = rec.SearchResult()
-
-    # Ask user to choose a filter to search movies
-    while True:
-        filter, result = gather_search_params()
-        list_of_titles = None
-        if filter == "genre":
-            search_result.genres = result
-            list_of_titles = data.filter_movies(search_result)
-            message = (
-                f"""Displaying up to 5 random movies with the following genres:
-{', '.join(search_result.genres)}""")
-        elif filter == "year":
-            search_result.year = result
-            list_of_titles = data.filter_movies(search_result)
-            if (search_result.year == "2020"):
-                message = (
-                    f"""Displaying up to 5 random movies released in the year:
-{search_result.year}""")
-            else:
-                message = (
-                    f"""Displaying up to 5 random movies released in the year:
-{search_result.year} until the end of the decade.""")
-        elif filter == "rating":
-            search_result.rating = result
-            list_of_titles = data.filter_movies(search_result)
-            message = (
-                f"""Displaying up to 5 random movies with a rating equal
-or greater than: {search_result.rating}""")
-
-        if list_of_titles:
-            print(f"\n{_L_YELLOW}{message}{_RESET}")
-            display_search_results(
-                list_of_titles, data, "Back to search, Exit"
-                )
-        else:
-            print(f"{_RED}No movies found, try changing your filters{_RESET}")
-
-        # Ask user if they want to choose another filter
-        another_filter = ask_another_filter_question()
-
-        # If user doesn't want to choose another filter, show the final filters
-        # and display the search results
-        if not another_filter:
-
-            final_display = (
-                (f'Genres: {", ".join(search_result.genres)};'
-                 if search_result.genres else "") +
-                (f" Year: {search_result.year};"
-                 if search_result.year else "") +
-                (f" Rating: {search_result.rating}."
-                 if search_result.rating else "")
-                )
-
-            print(f"""\n{_L_YELLOW}Your last (up to) 5 random movies filtered by
-{final_display} are:{_RESET}""")
-            display_search_results(list_of_titles, data, "Start over, Exit")
-
-            continue_search = ask_continue_question()
-            # If user wants to start a new search,
-            # _RESET search_result and continue the loop
-            if continue_search:
-                search_result = rec.SearchResult()
-            else:
-                print(f"""{_L_MAGENTA}
-Thank you for using the IMDB Top 1000 Movies Finder{_RESET}""")
-                break
 
 
 def gather_search_params():
@@ -306,6 +232,89 @@ Thank you for using the Top 1000 Movies Finder{_RESET}""")
                    numalign="center",
                    stralign="center",
                    showindex=False))
+    
+
+def main():
+    """Main function to run the program"""
+
+    print(f"\n{_L_MAGENTA}Welcome to the Top 1000 Movies Finder{_RESET}")
+    data = rec.Recommender()
+    search_result = rec.SearchResult()
+
+    # Ask user to choose a filter to search movies
+    while True:
+        filter, result = gather_search_params()
+        list_of_titles = None
+        if filter == "genre":
+            search_result.genres = result
+            list_of_titles = data.filter_movies(search_result)
+            message = (
+                f"""Displaying up to 5 random movies with the following genres:
+{', '.join(search_result.genres)}""")
+        elif filter == "year":
+            search_result.year = result
+            list_of_titles = data.filter_movies(search_result)
+            if (search_result.year == "2020"):
+                message = (
+                    f"""Displaying up to 5 random movies released in the year:
+{search_result.year}.""")
+            elif (search_result.year == ""):
+                message = (
+                    f"""Displaying up to 5 random movies released between 1920
+and 2020.""")
+            else:
+                message = (
+                    f"""Displaying up to 5 random movies released in the year:
+{search_result.year} until the end of the decade.""")
+        elif filter == "rating":
+            search_result.rating = result
+            list_of_titles = data.filter_movies(search_result)
+            if (search_result.rating == ""):
+                message =(
+                    f"""Displaying up to 5 random movies with a rating equal or
+greater than 0.""")
+            else:
+                message = (
+                    f"""Displaying up to 5 random movies with a rating equal
+or greater than: {search_result.rating}""")
+
+        if list_of_titles:
+            print(f"\n{_L_YELLOW}{message}{_RESET}")
+            display_search_results(
+                list_of_titles, data, "Back to search, Exit"
+                )
+        else:
+            print(f"{_RED}No movies found, try changing your filters{_RESET}")
+
+        # Ask user if they want to choose another filter
+        another_filter = ask_another_filter_question()
+
+        # If user doesn't want to choose another filter, show the final filters
+        # and display the search results
+        if not another_filter:
+
+            final_display = (
+                (f'Genres: {", ".join(search_result.genres)};'
+                 if search_result.genres else "") +
+                (f" Year: {search_result.year};"
+                 if search_result.year else "") +
+                (f" Rating: {search_result.rating}."
+                 if search_result.rating else "")
+                )
+
+            print(f"""\n{_L_YELLOW}Your last (up to) 5 random movies filtered by
+{final_display} are:{_RESET}""")
+            display_search_results(list_of_titles, data, "Start over, Exit")
+
+            continue_search = ask_continue_question()
+            # If user wants to start a new search,
+            # _RESET search_result and continue the loop
+            if continue_search:
+                search_result = rec.SearchResult()
+            else:
+                print(f"""{_L_MAGENTA}
+Thank you for using the IMDB Top 1000 Movies Finder{_RESET}""")
+                break
 
 
 if __name__ == "__main__":
