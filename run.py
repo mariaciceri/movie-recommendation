@@ -6,11 +6,11 @@ from colored import fore, style
 import recommender as rec
 
 # Set up colors for the text
-GREEN = fore('green')
-L_MAGENTA = fore('light_magenta')
-RED = fore('red')
-L_YELLOW = fore('light_yellow')
-RESET = style('reset')
+_GREEN = fore('green')
+_L_MAGENTA = fore('light_magenta')
+_RED = fore('red')
+_L_YELLOW = fore('light_yellow')
+_RESET = style('reset')
 
 
 def ask_genre_question():
@@ -40,7 +40,7 @@ def ask_genre_question():
         "Musical",
     ]
 
-    print(f"\n{GREEN}Choose up to 3 genres to filter your search{RESET}")
+    print(f"\n{_GREEN}Choose up to 3 genres to filter your search{_RESET}")
     instructions_genre = """
 Press up/down arrows to see more options.
 Press 'SPACE' to select, 'ENTER' to confirm"""
@@ -77,7 +77,7 @@ def validate_year(year):
 def ask_year_question():
     """Ask user to enter a year between 1920 and 2020"""
 
-    print(f"\n{GREEN}Enter a year between 1920 and 2020{RESET}")
+    print(f"\n{_GREEN}Enter a year between 1920 and 2020{_RESET}")
     year_questions = prompt(
         [
             {
@@ -110,7 +110,7 @@ def validate_rating(rating):
 def ask_rating_question():
     """Ask user to enter a rating between 0 and 100"""
 
-    print(f"\n{GREEN}Enter a rating between 0 and 100{RESET}")
+    print(f"\n{_GREEN}Enter a rating between 0 and 100{_RESET}")
     rating_questions = prompt(
         [
             {
@@ -129,7 +129,7 @@ def ask_rating_question():
 def ask_another_filter_question():
     """Ask user if they want to choose another filter"""
 
-    print(f"\n{GREEN}Do you want to choose another filter?{RESET}")
+    print(f"\n{_GREEN}Do you want to choose another filter?{_RESET}")
     another_filter_question = prompt(
         [
             {
@@ -146,7 +146,7 @@ def ask_another_filter_question():
 def ask_continue_question():
     """Ask user if they want to continue searching"""
 
-    print(f"\n{GREEN}Do you want to search anew?{RESET}")
+    print(f"\n{_GREEN}Do you want to search anew?{_RESET}")
     continue_question = prompt(
         [
             {
@@ -163,7 +163,7 @@ def ask_continue_question():
 def main():
     """Main function to run the program"""
 
-    print(f"\n{L_MAGENTA}Welcome to the Top 1000 Movies Finder{RESET}")
+    print(f"\n{_L_MAGENTA}Welcome to the Top 1000 Movies Finder{_RESET}")
     data = rec.Recommender()
     search_result = rec.SearchResult()
 
@@ -196,12 +196,12 @@ def main():
 or greater than: {search_result.rating}""")
 
         if list_of_titles:
-            print(f"\n{L_YELLOW}{message}{RESET}")
+            print(f"\n{_L_YELLOW}{message}{_RESET}")
             display_search_results(
                 list_of_titles, data, "Back to search, Exit"
                 )
         else:
-            print(f"{RED}No movies found, try changing your filters{RESET}")
+            print(f"{_RED}No movies found, try changing your filters{_RESET}")
 
         # Ask user if they want to choose another filter
         another_filter = ask_another_filter_question()
@@ -219,25 +219,25 @@ or greater than: {search_result.rating}""")
                  if search_result.rating else "")
                 )
 
-            print(f"""\n{L_YELLOW}Your last (up to) 5 random movies filtered by
-{final_display} are:{RESET}""")
+            print(f"""\n{_L_YELLOW}Your last (up to) 5 random movies filtered by
+{final_display} are:{_RESET}""")
             display_search_results(list_of_titles, data, "Start over, Exit")
 
             continue_search = ask_continue_question()
             # If user wants to start a new search,
-            # reset search_result and continue the loop
+            # _RESET search_result and continue the loop
             if continue_search:
                 search_result = rec.SearchResult()
             else:
-                print(f"""{L_MAGENTA}
-Thank you for using the IMDB Top 1000 Movies Finder{RESET}""")
+                print(f"""{_L_MAGENTA}
+Thank you for using the IMDB Top 1000 Movies Finder{_RESET}""")
                 break
 
 
 def gather_search_params():
     """Prompt user to choose a filter to search movies"""
 
-    print(f"{GREEN}Choose a filter to search movies{RESET}")
+    print(f"{_GREEN}Choose a filter to search movies{_RESET}")
     questions = [
         {
             "type": "list",
@@ -270,7 +270,7 @@ def display_search_results(list_of_titles, data, extra_options):
                                            min(5, len(list_of_titles)))
         choices = five_random_movies + extra_options.split(", ")
 
-        print(f"{GREEN}Choose a title below to see full details{RESET}")
+        print(f"{_GREEN}Choose a title below to see full details{_RESET}")
         questions = [
             {
                 "type": "list",
@@ -280,7 +280,7 @@ def display_search_results(list_of_titles, data, extra_options):
             }
         ]
     else:
-        print(f"{RED}No movies found, try changing your filters{RESET}")
+        print(f"{_RED}No movies found, try changing your filters{_RESET}")
         return
 
     answer = prompt(questions=questions)[0]
@@ -288,8 +288,8 @@ def display_search_results(list_of_titles, data, extra_options):
     if answer == "Back to search" or answer == "Start over":
         return
     if answer == "Exit":
-        print(f"""{L_MAGENTA}
-Thank you for using the Top 1000 Movies Finder{RESET}""")
+        print(f"""{_L_MAGENTA}
+Thank you for using the Top 1000 Movies Finder{_RESET}""")
 
         return exit()
 
