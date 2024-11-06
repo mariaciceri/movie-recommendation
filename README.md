@@ -84,18 +84,30 @@ In this project, the OOP principles of encapsulation and separation of concerns 
 
 ## Deployment
 
-+ The project was deployed using Code Institute's mock terminal for Heroku, following these steps:
-    + On the terminal, paste `kaggle datasets download harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows`;
-    + On the terminal, create a .kaggle directory (`mkdir .kaggle`) on your main directory
-    + Move the downloaded file(named 'kaggle') into .kaggle using the command `mv {source_path} {destination_path}`;
-    + Clone the [repository](https://github.com/mariaciceri/movie-recommendation) from GitHub page;
-    + Create a new Heroku app;
-    + In the Settings tab, set the buildpacks to Python and NodeJS in that order;
-    + In the Settings tab, set two Config Vars:
-        + CREDS(key): The information inside the kaggle file you downloaded previously(value)
-        + PORT(key): 8000(value)
-    + In the Deploy tab, scroll down to Manual Deploy, confirm that you are deploying from "main" and click on "Deploy Branch"
-    + Alternatively, enable "Enable Automatic Deploys"
++ The project was deployed using Code Institute's mock terminal for Heroku.
+
+### Deployment to Heroku
+
++ Clone the repository from GitHub page by running the command `git clone https://github.com/mariaciceri/movie-recommendation`;
++ On the terminal, download the dataset into your computer by running the command `kaggle datasets download harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows`;
++ On the terminal, create a .kaggle directory using the command (`mkdir .kaggle`) on your main directory;
++ Move the downloaded file(named 'kaggle') into .kaggle using the command `mv <source_path> <destination_path>`;
++ Save the project on your own GitHub account by using the command `git push`
++ Create a new Heroku app by clicking on "New" and then "Create new app" on their page;
+![Heroku menu with new app creating menu](/docs/images/heroku-new-app.png)
++ Give your app a unique name and set the region accordingly. Click create app.
++ In the Settings tab, add to the buildpacks Python and NodeJS scripts in that order;
+![Heroku menu after creating a new app with "Settings" selected](/docs/images/heroku-settings.png)
+![Heroku buildpacks](/docs/images/heroku-buildpacks.png)
++ In the Settings tab, set two Config Vars:
+    + CREDS(key): The information inside the kaggle file you downloaded previously(value)
+    + PORT(key): 8000(value)
+![Heroku config vars](/docs/images/heroku-config-vars.png)
++ In the Deploy tab, scroll down to Manual Deploy, confirm that you are deploying from "main" and click on "Deploy Branch";
+![Heroku menu with deploy selected](/docs/images/heroku-deploy.png)
+![Heroku Manual deploy](/docs/images/heroku-manual-deploy.png)
++ Alternatively, enable "Enable Automatic Deploys";
+![Heroku Automatic deploy](/docs/images/heroku-automatic-deploy.png)
 
 ## Testing
 ### Manual Testing
