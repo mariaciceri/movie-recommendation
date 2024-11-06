@@ -10,25 +10,25 @@ The user can choose to filter movies by genre (up to three), year (between 1920 
 
 ## How to Use
 
-When coming to the page, the user is welcomed and prompted to choose a filter to start the search. Then they must use the arrow up or down to select one of the three options (Genre, Year, Rating) and press enter.
++ When coming to the page, the user is welcomed and prompted to choose a filter to start the search. Then they must use the arrow up or down to select one of the three options (Genre, Year, Rating) and press enter.
 
-If "Genre" is selected, a list with all the genres available is displayed. The user must use the arrow keys up or down to navigate through the options, press space to select up to three genres, and then press enter to confirm.
++ If "Genre" is selected, a list with all the genres available is displayed. The user must use the arrow keys up or down to navigate through the options, press space to select up to three genres, and then press enter to confirm.
 
-If "Year" is selected, the user must type their answer (a year between 1920 and 2020) and press enter to confirm.
++ If "Year" is selected, the user must type their answer (a year between 1920 and 2020) and press enter to confirm.
 
-If "Rating" is selected, the user must type their answer (a number between 0 and 100) and press enter to confirm.
++ If "Rating" is selected, the user must type their answer (a number between 0 and 100) and press enter to confirm.
 
-After each input, the user will have a list of up to 5 movie titles to select to see full details and a "Back to search" and "Exit" option.
++ After each input, the user will have a list of up to 5 movie titles to select to see full details and a "Back to search" and "Exit" option.
 
-The user is asked if they want to choose another filter and they must type "Y"(yes) or "N"(no) to answer. This is insensitive to capitalization.
++ The user is asked if they want to choose another filter and they must type "Y"(yes) or "N"(no) to answer. This is insensitive to capitalization.
 
-The "Back to search" option takes the user to the filter selection part and the "Exit" ends the program.
++ The "Back to search" option takes the user to the filter selection part and the "Exit" ends the program.
 
-If the user does not wish to filter further, a last list of movies will be displayed and they will be asked if they want to restart the search, if "Y" is answered, the filters are emptied and they can start over the search, otherwise, "N" is press, the program will end and a message thanking them for using the program will be displayed.
++ If the user does not wish to filter further, a last list of movies will be displayed and they will be asked if they want to restart the search, if "Y" is answered, the filters are emptied and they can start over the search, otherwise, "N" is press, the program will end and a message thanking them for using the program will be displayed.
 
-None of the filters are mandatory, meaning that if the user selects a filter and regrets choosing it, a simple "enter" will make a random movie list appear without being affected by that specific filter. 
++ None of the filters are mandatory, meaning that if the user selects a filter and regrets choosing it, a simple "enter" will make a random movie list appear without being affected by that specific filter. 
 
-This flow chart demonstrates how the program runs:
++ This flow chart demonstrates how the program runs:
 ![Flow chart of the program](/docs/images/flowchart.png)
 
 ## Features
@@ -117,7 +117,6 @@ In this project, the OOP principles of encapsulation and separation of concerns 
 + Clone the repository from GitHub page by running the command `git clone https://github.com/mariaciceri/movie-recommendation.git` 
 + Alternatively, download it as a ZIP file from `https://github.com/mariaciceri/movie-recommendation` and extract it to a chosen location in your computer;
 
-
 ## Testing
 ### Manual Testing
 + The project was manually tested by doing the following:
@@ -136,6 +135,11 @@ In this project, the OOP principles of encapsulation and separation of concerns 
     + Select one of the movie titles displayed:
         + Display a table with information about the movie and prompts if the user wants to choose another filter.
 
+### Validator Testing
+
++ No errors were found by the PEP8 in both Python files.
+![Screenshot of Code Institute's Python Style Validator for the run.py file](/docs/images/run-py-validator.png)
+![Screenshot of Code Institute's Python Style Validator for the recommender.py file](/docs/images/recommender-validator.png)
 
 ### Bugs
 #### Solved Bugs
@@ -152,12 +156,6 @@ In this project, the OOP principles of encapsulation and separation of concerns 
 #### Unsolved Bugs
 
 + No known unsolved bug is present in the project.
-
-### Validator Testing
-
-+ No errors were found by the PEP8 in both Python files.
-![Screenshot of Code Institute's Python Style Validator for the run.py file](/docs/images/run-py-validator.png)
-![Screenshot of Code Institute's Python Style Validator for the recommender.py file](/docs/images/recommender-validator.png)
 
 ## Credits
 
