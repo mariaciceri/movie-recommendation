@@ -88,26 +88,35 @@ In this project, the OOP principles of encapsulation and separation of concerns 
 
 ### Deployment to Heroku
 
-+ Clone the repository from GitHub page by running the command `git clone https://github.com/mariaciceri/movie-recommendation`;
-+ On the terminal, download the dataset into your computer by running the command `kaggle datasets download harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows`;
-+ On the terminal, create a .kaggle directory using the command (`mkdir .kaggle`) on your main directory;
-+ Move the downloaded file(named 'kaggle') into .kaggle using the command `mv <source_path> <destination_path>`;
++ Clone the repository from GitHub page by running the command `git clone https://github.com/mariaciceri/movie-recommendation.git`;
 + Save the project on your own GitHub account by using the command `git push`
 + Create a new Heroku app by clicking on "New" and then "Create new app" on their page;
 ![Heroku menu with new app creating menu](/docs/images/heroku-new-app.png)
++ In the Deploy tab, look for "Deployment method" and select GitHub;
+![Heroku menu with deploy selected](/docs/images/heroku-deploy.png)
++ Connect to your GitHub account if not done already and right below it, find your repository and connect to Heroku;
+![Heroku Deployment method and App connected to GitHub](/docs/images/heroku-github.png)
 + Give your app a unique name and set the region accordingly. Click create app.
 + In the Settings tab, add to the buildpacks Python and NodeJS scripts in that order;
 ![Heroku menu after creating a new app with "Settings" selected](/docs/images/heroku-settings.png)
 ![Heroku buildpacks](/docs/images/heroku-buildpacks.png)
-+ In the Settings tab, set two Config Vars:
-    + CREDS(key): The information inside the kaggle file you downloaded previously(value)
++ In the Settings tab, set one Config Vars:
     + PORT(key): 8000(value)
 ![Heroku config vars](/docs/images/heroku-config-vars.png)
 + In the Deploy tab, scroll down to Manual Deploy, confirm that you are deploying from "main" and click on "Deploy Branch";
-![Heroku menu with deploy selected](/docs/images/heroku-deploy.png)
 ![Heroku Manual deploy](/docs/images/heroku-manual-deploy.png)
 + Alternatively, enable "Enable Automatic Deploys";
 ![Heroku Automatic deploy](/docs/images/heroku-automatic-deploy.png)
++ It may take a couple of minutes to deploy, after completed, a "View" button will be available and it will take you to the deployed page.
+
+### Run locally
+
++ If Python ins't installed, download from the [official webpage](https://www.python.org/downloads/).
++ For this project to run with all its functionalities, install:
+    + `pip install colored InquirerPy pandas tabulate`
++ Clone the repository from GitHub page by running the command `git clone https://github.com/mariaciceri/movie-recommendation.git` 
++ Alternatively, download it as a ZIP file from `https://github.com/mariaciceri/movie-recommendation` and extract it to a chosen location in your computer;
+
 
 ## Testing
 ### Manual Testing
