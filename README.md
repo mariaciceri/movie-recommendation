@@ -4,7 +4,7 @@ Top 1000 Movies Finder is a Python program that suggests movies based on the use
 
 The user can choose to filter movies by genre (up to three), year (between 1920 and 2020), and/or rating (between 0 and 100).
 
-[Check the project here!](https://best-1000-movie-finder-37b039113a18.herokuapp.com/)
+[Check the project here!](https://movie-recommendation-yryd.onrender.com)
 
 ![Am I responsive screenshot](/docs/images/am-i-responsive.png)
 
